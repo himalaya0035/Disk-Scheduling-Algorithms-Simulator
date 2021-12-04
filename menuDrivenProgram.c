@@ -27,7 +27,7 @@ int main() {
     }
   }
   do {
-    printf("\n\nDISK SCHEDULING ALGORITHMS\n1. FCFS\n2. SSTF\n3. SCAN\n4. C-SCAN\n5. LOOK\n6. C-LOOK");
+    printf("\n\nDISK SCHEDULING ALGORITHMS\n1. FCFS\n2. SSTF\n3. SCAN\n4. C-SCAN\n5. LOOK\n");
     printf("\nEnter choice :");
     scanf("%d", & choice);
     count = 0;
@@ -117,23 +117,35 @@ int main() {
             a[j] = a[j + 1];
             a[j + 1] = x;
           }
+      
       for (i = 0; i < n; i++)
         if (a[i] < start)
           pos++;
+      
+      pos--;
       x = start;
-      for (i = pos; i < n; i++) {
-        count += absolute(x, a[i]);
+      
+      count += absolute(x , a[pos]);
+      x = a[pos];
+      for(i = pos; i >= 0 ; i--) {
+      	count += absolute(x, a[i]);
         x = a[i];
         printf("%d\t", x);
       }
-      count += absolute(m - 1, x);
+      
+      
+      count += absolute(x , 0);
       x = 0;
-      printf("%d\t%d\t", m - 1, 0);
-      for (i = 0; i < pos; i++) {
+      count += absolute(m - 1, x);
+      x = m-1;
+      printf("%d\t%d\t", 0 , m - 1);
+      
+      for (i = n-1; i > pos; i--) {
         count += absolute(x, a[i]);
         x = a[i];
         printf("%d\t", x);
       }
+      
 
       printf("\nTotal Head movement: %d Cylinders", count);
       break;
